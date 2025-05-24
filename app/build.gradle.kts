@@ -6,9 +6,10 @@ android {
     namespace = "com.example.notes"
     compileSdk = 35
 
+
     defaultConfig {
         applicationId = "com.example.notes"
-        minSdk = 29
+        minSdk = 29;
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -41,5 +42,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("androidx.room:room-runtime:2.7.1")
+    annotationProcessor("androidx.room:room-compiler:2.7.1")
 }

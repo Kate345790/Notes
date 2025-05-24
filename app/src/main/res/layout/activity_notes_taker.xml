@@ -26,12 +26,12 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_save"
             android:padding="6dp"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <EditText
+<EditText
         android:id="@+id/editText_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

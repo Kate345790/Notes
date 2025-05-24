@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Присвоение элементов на макете
-        recyclerView = findViewById(R.id.recycler);
+        //  recyclerView = findViewById(R.id.recycler);
         fab_add = findViewById(R.id.fab);
         database = RoomDB.getInstance(this);
         notes = database.mainDAO().getAll();
@@ -47,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
+                startActivityForResult(intent, 101);
             }
         });
-
-
-
-        }
+    }
 
     private void updateRecycler(List<Notes> notes) {
         recyclerView.setHasFixedSize(true);
