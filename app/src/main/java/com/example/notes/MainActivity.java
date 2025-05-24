@@ -27,40 +27,49 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab_add;
     NotesListAdapter notesListAdapter;
     //Объявление БД
-    // RoomDB database;
-    //List<Notes> notes = new ArrayList<>();
+    RoomDB database;
+    List<Notes> notes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Присвоение элементов на макете
-        //database = RoomDB.getInstance(this);
-        //notes = database.mainDAO().getAll();
+        recyclerView = findViewById(R.id.recycler);
+        fab_add = findViewById(R.id.fab);
+        database = RoomDB.getInstance(this);
+        notes = database.mainDAO().getAll();
 
-        //updateRecycler(notes);
+        updateRecycler(notes);
+
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
+        });
+
+
+
+        }
 
     private void updateRecycler(List<Notes> notes) {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
+        notesListAdapter = new NotesListAdapter(MainActivity.this, notes,notesClickListener );
+        recyclerView.setAdapter(notesListAdapter);
     }
+    private final NotesClickListener notesClickListener = new NotesClickListener() {
+        @Override
+        public void onClick(Notes notes) {
+            Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
+            startActivityForResult(intent, 101);
+        }
 
+        @Override
+        public void onLongClick(Notes notes, CardView cardView) {
 
+        }
+    };
 }
 
-//private void updateRecycler(List<Notes> notes) {
-// recyclerView.setHasFixedSize(true);
-// recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
-// notesListAdapter = new NotesListAdapter(MainActivity.this, notes,notesClickListener );
-// recyclerView.setAdapter(notesListAdapter);
-// }
-// private final NotesClickListener notesClickListener = new NotesClickListener() {
-// @Override
-// public void onClick(Notes notes) {
-// Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
-// startActivityForResult(intent, 101);
-// }
-// @Override
-// public void onLongClick(Notes notes, CardView cardView) {
-// }
-// };
